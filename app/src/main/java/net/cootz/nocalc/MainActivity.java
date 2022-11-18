@@ -1,5 +1,6 @@
 package net.cootz.nocalc;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -25,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         else if (text.contains("sin"))
             return new Float(Math.sin(new Float(text.replace("sin(","").replace(")", ""))));
         else if (text.contains("tg"))
-            return new Float(Math.tan(new Float(text.replace("sin(","").replace(")", ""))));
+            return new Float(Math.tan(new Float(text.replace("tg(","").replace(")", ""))));
         else if (text.contains("abs"))
-            return new Float(Math.abs(new Float(text.replace("sin(","").replace(")", ""))));
+            return new Float(Math.abs(new Float(text.replace("abs(","").replace(")", ""))));
         else if (text.contains("sqrt"))
-            return new Float(Math.sqrt(new Float(text.replace("sin(","").replace(")", ""))));
+            return new Float(Math.sqrt(new Float(text.replace("sqrt(","").replace(")", ""))));
         else
             return new Float(text);
     }
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e)
         {
             isBroken = true;
+            AlertDialog.Builder errorDialog = new AlertDialog.Builder(this);
+            errorDialog.setMessage(e.getMessage());
+            errorDialog.setTitle("Error");
+            errorDialog.create().show();
         }
 
         if (!isBroken)
