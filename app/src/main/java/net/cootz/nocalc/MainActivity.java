@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -35,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
             return new Float(text);
     }
 
-    public void onAddClick(View view) {
+    public void onAbstractClick(IButtonClick<Float> onCLick)
+    {
         float a = 0f;
         float b = 0f;
         boolean isBroken = false;
@@ -54,30 +54,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (!isBroken)
-            ((EditText)findViewById(R.id.editTextResult)).setText(Float.toString(a+b));
+            ((EditText) findViewById(R.id.editTextResult)).setText(Float.toString(onCLick.Result(a, b)));
+    }
+
+    public void onAddClick(View view) {
+        IButtonClick<Float> onClick = (a, b) -> a + b;
+        onAbstractClick(onClick);
     }
 
     public void onSubtract(View view)
     {
-        float a = getContentValue(((EditText)findViewById(R.id.editTextA)).getText().toString());
-        float b = getContentValue(((EditText)findViewById(R.id.editTextB)).getText().toString());
-
-        ((EditText)findViewById(R.id.editTextResult)).setText(Float.toString(a-b));
+        IButtonClick<Float> onClick = (a, b) -> a - b;
+        onAbstractClick(onClick);
     }
 
     public void onMultiply(View view)
     {
-        float a = getContentValue(((EditText)findViewById(R.id.editTextA)).getText().toString());
-        float b = getContentValue(((EditText)findViewById(R.id.editTextB)).getText().toString());
-
-        ((EditText)findViewById(R.id.editTextResult)).setText(Float.toString(a*b));
+        IButtonClick<Float> onClick = (a, b) -> a * b;
+        onAbstractClick(onClick);
     }
 
     public void onDivide(View view)
     {
-        float a = getContentValue(((EditText)findViewById(R.id.editTextA)).getText().toString());
-        float b = getContentValue(((EditText)findViewById(R.id.editTextB)).getText().toString());
-
-        ((EditText)findViewById(R.id.editTextResult)).setText(Float.toString(a/b));
+        IButtonClick<Float> onClick = (a, b) -> a / b;
+        onAbstractClick(onClick);
     }
 }

@@ -6,4 +6,5 @@
     <string name="subtract">Subtract</string>
     <string name="multiply">Multiply</string>
     <string name="divide">Divide</string>
+    <string name="result">Result</string>
 </resources>
